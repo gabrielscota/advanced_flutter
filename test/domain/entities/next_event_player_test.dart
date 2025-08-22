@@ -39,7 +39,7 @@ class NextEventPlayer {
   static String _getInitials(String name) {
     final List<String> nameParts = name.split(' ');
 
-    return '${nameParts.first[0]}${nameParts.last[0]}';
+    return '${nameParts.first[0]}${nameParts.last[nameParts.length == 1 ? 1 : 0]}';
   }
 }
 
@@ -51,5 +51,10 @@ void main() {
     expect(initialsOf('John Doe'), 'JD');
     expect(initialsOf('Jane Smith'), 'JS');
     expect(initialsOf('Jim Brown Anderson'), 'JA');
+  });
+
+  test('should return the first letters of the first name', () {
+    // Arrange & Act & Assert (AAA)
+    expect(initialsOf('John'), 'Jo');
   });
 }
