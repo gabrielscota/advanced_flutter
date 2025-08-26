@@ -38,7 +38,7 @@ class NextEventPlayer {
 
   static String _getInitials(String name) {
     final List<String> nameParts = name.toUpperCase().split(' ');
-    final String firstChar = nameParts.first[0];
+    final String firstChar = nameParts.first.split('').firstOrNull ?? '-';
     final String lastChar = nameParts.last.split('').elementAtOrNull(nameParts.length == 1 ? 1 : 0) ?? '';
 
     return '$firstChar$lastChar';
@@ -59,6 +59,11 @@ void main() {
     // Arrange & Act & Assert (AAA)
     expect(initialsOf('John'), 'JO');
     expect(initialsOf('J'), 'J');
+  });
+
+  test('should return "-" when name is empty', () {
+    // Arrange & Act & Assert (AAA)
+    expect(initialsOf(''), '-');
   });
 
   test('should convert to uppercase', () {
