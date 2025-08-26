@@ -38,8 +38,10 @@ class NextEventPlayer {
 
   static String _getInitials(String name) {
     final List<String> nameParts = name.toUpperCase().split(' ');
+    final String firstChar = nameParts.first[0];
+    final String lastChar = nameParts.last.split('').elementAtOrNull(nameParts.length == 1 ? 1 : 0) ?? '';
 
-    return '${nameParts.first[0]}${nameParts.last[nameParts.length == 1 ? 1 : 0]}';
+    return '$firstChar$lastChar';
   }
 }
 
@@ -56,11 +58,13 @@ void main() {
   test('should return the first letters of the first name', () {
     // Arrange & Act & Assert (AAA)
     expect(initialsOf('John'), 'JO');
+    expect(initialsOf('J'), 'J');
   });
 
   test('should convert to uppercase', () {
     // Arrange & Act & Assert (AAA)
     expect(initialsOf('john doe'), 'JD');
     expect(initialsOf('john'), 'JO');
+    expect(initialsOf('j'), 'J');
   });
 }
