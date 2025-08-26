@@ -1,4 +1,4 @@
-class NextEventPlayer {
+class NextEventPlayerEntity {
   final String id;
   final String name;
   final String initials;
@@ -7,7 +7,7 @@ class NextEventPlayer {
   final bool isConfirmed;
   final DateTime? confirmationDate;
 
-  NextEventPlayer._({
+  NextEventPlayerEntity._({
     required this.id,
     required this.name,
     required this.initials,
@@ -17,14 +17,14 @@ class NextEventPlayer {
     this.confirmationDate,
   });
 
-  factory NextEventPlayer({
+  factory NextEventPlayerEntity({
     required String id,
     required String name,
     String? photo,
     String? position,
     required bool isConfirmed,
     DateTime? confirmationDate,
-  }) => NextEventPlayer._(
+  }) => NextEventPlayerEntity._(
     id: id,
     name: name,
     initials: _getInitials(name),

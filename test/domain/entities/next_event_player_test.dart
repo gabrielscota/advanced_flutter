@@ -2,7 +2,7 @@ import 'package:advanced_flutter/domain/entities/entities.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  String initialsOf(String name) => NextEventPlayer(id: '1', name: name, isConfirmed: true).initials;
+  String initialsOf(String name) => NextEventPlayerEntity(id: '1', name: name, isConfirmed: true).initials;
 
   test('should return the first letter of the first and last names', () {
     // Arrange & Act & Assert (AAA)
