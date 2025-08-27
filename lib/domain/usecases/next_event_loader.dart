@@ -8,6 +8,6 @@ class NextEventLoaderUseCase {
   NextEventLoaderUseCase({required this.repository});
 
   Future<NextEventEntity> call({required String groupId}) async {
-    return await repository.loadNextEvent(groupId: groupId);
+    return repository.loadNextEvent(groupId: groupId);
   }
 }
