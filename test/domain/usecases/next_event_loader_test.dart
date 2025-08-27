@@ -1,9 +1,9 @@
-import 'dart:math';
-
 import 'package:advanced_flutter/domain/entities/entities.dart';
 import 'package:advanced_flutter/domain/repositories/repositories.dart';
 import 'package:advanced_flutter/domain/usecases/usecases.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../helpers/fakes.dart';
 
 class SpyLoadNextEventRepository implements LoadNextEventRepository {
   String? groupId;
@@ -46,7 +46,7 @@ void main() {
     );
     sut = NextEventLoaderUseCase(repository: repository);
 
-    groupId = Random().nextInt(50000).toString();
+    groupId = anyString();
   });
 
   test('should load event data from a repository', () async {
