@@ -1,3 +1,5 @@
+import '../entities/entities.dart';
+
 abstract interface class LoadNextEventRepository {
-  Future<void> loadNextEvent({required String groupId});
+  Future<NextEventEntity> loadNextEvent({required String groupId});
 }
