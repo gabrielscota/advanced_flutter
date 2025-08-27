@@ -9,11 +9,14 @@ class SpyLoadNextEventRepository implements LoadNextEventRepository {
   String? groupId;
   int callCount = 0;
   NextEventEntity? output;
+  Error? error;
 
   @override
   Future<NextEventEntity> loadNextEvent({required String groupId}) async {
     this.groupId = groupId;
     callCount++;
+
+    if (error != null) throw error!;
 
     return output!;
   }
@@ -74,5 +77,17 @@ void main() {
     expect(event.players[1].initials, isNotEmpty);
     expect(event.players[1].position, repository.output?.players[1].position);
     expect(event.players[1].isConfirmed, repository.output?.players[1].isConfirmed);
+  });
+
+  test('should rethrow on error', () async {
+    // Arrange
+    final Error error = Error();
+    repository.error = error;
+
+    // Act
+    final Future<NextEventEntity> future = sut(groupId: groupId);
+
+    // Assert
+    expect(future, throwsA(error));
   });
 }
