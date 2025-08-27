@@ -1,20 +1,8 @@
 import 'dart:math';
 
+import 'package:advanced_flutter/domain/repositories/repositories.dart';
+import 'package:advanced_flutter/domain/usecases/usecases.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-class NextEventLoaderUseCase {
-  final LoadNextEventRepository repository;
-
-  NextEventLoaderUseCase({required this.repository});
-
-  Future<void> call({required String groupId}) async {
-    await repository.loadNextEvent(groupId: groupId);
-  }
-}
-
-abstract interface class LoadNextEventRepository {
-  Future<void> loadNextEvent({required String groupId});
-}
 
 class MockLoadNextEventRepository implements LoadNextEventRepository {
   String? groupId;
@@ -28,12 +16,19 @@ class MockLoadNextEventRepository implements LoadNextEventRepository {
 }
 
 void main() {
-  test('should load event data from a repository', () async {
-    // Arrange
-    final String groupId = Random().nextInt(50000).toString();
-    final MockLoadNextEventRepository repository = MockLoadNextEventRepository();
-    final NextEventLoaderUseCase sut = NextEventLoaderUseCase(repository: repository);
+  late MockLoadNextEventRepository repository;
+  late NextEventLoaderUseCase sut;
 
+  late String groupId;
+
+  setUp(() {
+    repository = MockLoadNextEventRepository();
+    sut = NextEventLoaderUseCase(repository: repository);
+
+    groupId = Random().nextInt(50000).toString();
+  });
+
+  test('should load event data from a repository', () async {
     // Act
     await sut(groupId: groupId);
 
