@@ -5,7 +5,7 @@ import 'package:advanced_flutter/domain/repositories/repositories.dart';
 import 'package:advanced_flutter/domain/usecases/usecases.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockLoadNextEventRepository implements LoadNextEventRepository {
+class SpyLoadNextEventRepository implements LoadNextEventRepository {
   String? groupId;
   int callCount = 0;
   NextEventEntity? output;
@@ -20,13 +20,13 @@ class MockLoadNextEventRepository implements LoadNextEventRepository {
 }
 
 void main() {
-  late MockLoadNextEventRepository repository;
+  late SpyLoadNextEventRepository repository;
   late NextEventLoaderUseCase sut;
 
   late String groupId;
 
   setUp(() {
-    repository = MockLoadNextEventRepository();
+    repository = SpyLoadNextEventRepository();
     repository.output = NextEventEntity(
       groupName: 'any_group',
       date: DateTime.now(),
